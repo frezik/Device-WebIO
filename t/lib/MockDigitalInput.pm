@@ -3,22 +3,13 @@ use v5.12;
 use Moo;
 use namespace::clean;
 
-use constant input_pin_count => 8;
+
+has 'input_pin_count', is => 'ro';
 
 with 'Device::WebIO::Device::DigitalInput';
 
-has '_pin_input' => (
-    is      => 'ro',
-    default => sub {[
-        (0) x input_pin_count(),
-    ]},
-);
-has '_pin_set_input' => (
-    is      => 'ro',
-    default => sub {[
-        (0) x input_pin_count(),
-    ]},
-);
+has '_pin_input',     is => 'ro', default => sub {[]};
+has '_pin_set_input', is => 'ro', default => sub {[]};
 
 
 sub mock_set_input

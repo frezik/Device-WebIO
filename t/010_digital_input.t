@@ -21,13 +21,15 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 7;
+use Test::More tests => 8;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
 use MockDigitalInput;
 
-my $input = MockDigitalInput->new;
+my $input = MockDigitalInput->new({
+    input_pin_count => 8,
+});
 ok( $input->does( 'Device::WebIO::Device' ), "Does Device role" );
 ok( $input->does( 'Device::WebIO::Device::DigitalInput' ),
     "Does DigitalInput role" );
@@ -45,3 +47,5 @@ $input->mock_set_input( 0, 0 );
 $input->mock_set_input( 1, 1 );
 ok(!$webio->digital_input( 'foo', 0 ), "Input 0 on pin 0" );
 ok( $webio->digital_input( 'foo', 1 ), "Input 1 on pin 1" );
+
+cmp_ok( $webio->digital_pin_count( 'foo' ), '==', 8, "Fetch pin count" );

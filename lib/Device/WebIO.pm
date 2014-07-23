@@ -36,6 +36,25 @@ sub set_as_output
     return 1;
 }
 
+sub digital_pin_count
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    
+    my $count;
+    if( $obj->does( 'Device::WebIO::Device::DigitalInput' ) ) {
+        $count = $obj->input_pin_count;
+    }
+    elsif( $obj->does( 'Device::WebIO::Device::DigitalOutput' ) ) {
+        $count = $obj->output_pin_count;
+    }
+    else {
+        die "Device '$name' is not a digital input or output\n";
+    }
+
+    return $count;
+}
+
 sub digital_input
 {
     my ($self, $name, $pin) = @_;

@@ -3,22 +3,11 @@ use v5.12;
 use Moo;
 use namespace::clean;
 
-use constant output_pin_count => 8;
-
+has 'output_pin_count', is => 'ro';
 with 'Device::WebIO::Device::DigitalOutput';
 
-has '_pin_output' => (
-    is      => 'ro',
-    default => sub {[
-        (0) x output_pin_count(),
-    ]},
-);
-has '_pin_set_output' => (
-    is      => 'ro',
-    default => sub {[
-        (0) x output_pin_count(),
-    ]},
-);
+has '_pin_output',     is => 'ro', default => sub {[]};
+has '_pin_set_output', is => 'ro', default => sub {[]};
 
 
 sub mock_get_output
