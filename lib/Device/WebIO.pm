@@ -27,6 +27,14 @@ sub digital_input
     return $obj->input_pin( $pin );
 }
 
+sub digital_output
+{
+    my ($self, $name, $pin, $val) = @_;
+    my $obj = $self->_device_by_name->{$name};
+    $obj->output_pin( $pin, $val );
+    return 1;
+}
+
 
 
 1;
