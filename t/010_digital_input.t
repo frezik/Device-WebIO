@@ -21,17 +21,20 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 11;
+use Test::More tests => 4;
 use v5.12;
+use lib 't/lib/';
+use Device::WebIO;
+use MockDigitalInput;
 
-use_ok( 'Device::WebIO' );
-use_ok( 'Device::WebIO::Device' );
-use_ok( 'Device::WebIO::Device::DigitalInput' );
-use_ok( 'Device::WebIO::Device::DigitalOutput' );
-use_ok( 'Device::WebIO::Device::ADC' );
-use_ok( 'Device::WebIO::Device::PWM' );
-use_ok( 'Device::WebIO::Device::SPI' );
-use_ok( 'Device::WebIO::Device::I2C' );
-use_ok( 'Device::WebIO::Device::Serial' );
-use_ok( 'Device::WebIO::Device::OneWire' );
-use_ok( 'Device::WebIO::Device::VideoStream' );
+my $input = MockDigitalInput->new;
+ok( $input->does( 'Device::WebIO::Device' ), "Does Device role" );
+ok( $input->does( 'Device::WebIO::Device::DigitalInput' ),
+    "Does DigitalInput role" );
+
+my $webio = Device::WebIO->new;
+$webio->register( 'foo', $input );
+
+$input->mock_set_input( 1, 1 );
+ok(!$webio->digital_input( 'foo', 0 ), "Input 0 on pin 0" );
+ok( $webio->digital_input( 'foo', 1 ), "Input 1 on pin 1" );
