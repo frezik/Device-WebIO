@@ -1,0 +1,16 @@
+* PWM
+* VideoStream
+* SPI
+* I2C
+* OneWire
+* Serial
+* Sensors
+    * Temperature
+    * Pressure
+    * Luminosity
+    * Distance
+    * Gyro
+    * Accelerometer
+    * Moisture
+* Wireless communication
+    * NRF24L01
