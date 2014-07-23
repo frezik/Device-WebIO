@@ -7,6 +7,7 @@ with 'Device::WebIO::Device';
 
 requires 'input_pin_count';
 requires 'input_pin';
+requires 'set_as_input';
 
 
 1;

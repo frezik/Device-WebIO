@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 4;
+use Test::More tests => 7;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -35,6 +35,13 @@ ok( $input->does( 'Device::WebIO::Device::DigitalInput' ),
 my $webio = Device::WebIO->new;
 $webio->register( 'foo', $input );
 
+$webio->set_as_input( 'foo', 0 );
+$webio->set_as_input( 'foo', 1 );
+ok( $input->mock_is_set_input( 0 ), "Pin 0 set as input" );
+ok( $input->mock_is_set_input( 1 ), "Pin 1 set as input" );
+ok(!$input->mock_is_set_input( 2 ), "Pin 2 not set as input" );
+
+$input->mock_set_input( 0, 0 );
 $input->mock_set_input( 1, 1 );
 ok(!$webio->digital_input( 'foo', 0 ), "Input 0 on pin 0" );
 ok( $webio->digital_input( 'foo', 1 ), "Input 1 on pin 1" );
