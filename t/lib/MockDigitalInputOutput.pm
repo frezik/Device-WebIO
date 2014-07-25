@@ -3,7 +3,7 @@ use v5.12;
 use Moo;
 use namespace::clean;
 
-use constant input_pin_count  => 8;
+use constant input_pin_count  => 10;
 use constant output_pin_count => 8;
 use constant TYPE_INPUT  => 1;
 use constant TYPE_OUTPUT => 0;

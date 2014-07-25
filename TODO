@@ -1,3 +1,4 @@
+* Split digital_pin_count() into input and output versions
 * VideoStream
 * SPI
 * I2C
