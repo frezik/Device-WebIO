@@ -1,5 +1,4 @@
-* Exceptions for ADC and PWM, matching Digital I/O
-* PWM (split off Servo control?)
+* Exceptions for PWM, matching Digital I/O
 * VideoStream
 * SPI
 * I2C

@@ -69,6 +69,7 @@ sub adc_count
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_pin_count;
 }
 
@@ -76,6 +77,7 @@ sub adc_resolution
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_bit_resolution;
 }
 
@@ -83,6 +85,7 @@ sub adc_max_int
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_max_int;
 }
 
@@ -90,6 +93,7 @@ sub adc_volt_ref
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_volt_ref;
 }
 
@@ -97,6 +101,8 @@ sub adc_input_int
 {
     my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'adc input' );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_input_int( $pin );
 }
 
@@ -104,6 +110,8 @@ sub adc_input_float
 {
     my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'adc input' );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_input_float( $pin );
 }
 
@@ -111,6 +119,8 @@ sub adc_input_volts
 {
     my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'adc input' );
+    $self->_role_check( $obj, 'ADC' );
     return $obj->adc_input_volts( $pin );
 }
 
@@ -182,6 +192,9 @@ sub _pin_count_for_obj
     }
     elsif( $obj->does( 'Device::WebIO::Device::DigitalOutput' ) ) {
         $count = $obj->output_pin_count;
+    }
+    elsif( $obj->does( 'Device::WebIO::Device::ADC' ) ) {
+        $count = $obj->adc_pin_count;
     }
 
     return $count;

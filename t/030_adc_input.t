@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 13;
+use Test::More tests => 17;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -59,3 +59,30 @@ cmp_ok( $webio->adc_input_float( 'foo', 2 ), '==', 127 / 255,
 cmp_ok( $webio->adc_input_volts( 'foo', 0 ), '==', 5.0, "ADC pin 0 volts" );
 cmp_ok( $webio->adc_input_volts( 'foo', 2 ), '==', (127 / 255) * 5.0,
     "ADC pin 2 volts" );
+
+
+eval {
+    $webio->adc_input_int( 'foo', 10 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for adc_input_int()" );
+
+eval {
+    $webio->adc_input_float( 'foo', 10 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for adc_input_float()" );
+
+eval {
+    $webio->adc_input_volts( 'foo', 10 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for adc_input_volts()" );
+
+eval {
+    $webio->digital_output( 'foo', 0 );
+};
+ok( ($@ && Device::WebIO::FunctionNotSupportedException->caught( $@ )),
+    "Caught exception for using a digital output function on an"
+        . " adc-only object"
+);
