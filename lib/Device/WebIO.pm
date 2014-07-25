@@ -128,6 +128,7 @@ sub pwm_count
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'PWM' );
     return $obj->pwm_pin_count;
 }
 
@@ -135,6 +136,7 @@ sub pwm_resolution
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'PWM' );
     return $obj->pwm_bit_resolution;
 }
 
@@ -142,6 +144,7 @@ sub pwm_max_int
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'PWM' );
     return $obj->pwm_max_int;
 }
 
@@ -149,6 +152,8 @@ sub pwm_output_int
 {
     my ($self, $name, $pin, $value) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'pwm output' );
+    $self->_role_check( $obj, 'PWM' );
     return $obj->pwm_output_int( $pin, $value );
 }
 
@@ -156,6 +161,8 @@ sub pwm_output_float
 {
     my ($self, $name, $pin, $value) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'pwm output' );
+    $self->_role_check( $obj, 'PWM' );
     return $obj->pwm_output_float( $pin, $value );
 }
 
@@ -195,6 +202,9 @@ sub _pin_count_for_obj
     }
     elsif( $obj->does( 'Device::WebIO::Device::ADC' ) ) {
         $count = $obj->adc_pin_count;
+    }
+    elsif( $obj->does( 'Device::WebIO::Device::PWM' ) ) {
+        $count = $obj->pwm_pin_count;
     }
 
     return $count;

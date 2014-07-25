@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 8;
+use Test::More tests => 11;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -49,3 +49,24 @@ $webio->pwm_output_float( 'foo', 2, 0.5 );
 cmp_ok( $output->mock_get_output( 0 ), '==', 255, "PWM pin 0 set" );
 cmp_ok( $output->mock_get_output( 1 ), '==', 0,   "PWM pin 1 set" );
 cmp_ok( $output->mock_get_output( 2 ), '==', 128, "PWM pin 2 set" );
+
+
+eval {
+    $webio->pwm_output_int( 'foo', 10, 1 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for pwm_output_int()" );
+
+eval {
+    $webio->pwm_output_float( 'foo', 10, 1 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for pwm_output_float()" );
+
+eval {
+    $webio->digital_output( 'foo', 0 );
+};
+ok( ($@ && Device::WebIO::FunctionNotSupportedException->caught( $@ )),
+    "Caught exception for using a digital output function on a"
+        . " pwm-only object"
+);
