@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 8;
+use Test::More tests => 11;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -49,3 +49,22 @@ ok(!$webio->digital_input( 'foo', 0 ), "Input 0 on pin 0" );
 ok( $webio->digital_input( 'foo', 1 ), "Input 1 on pin 1" );
 
 cmp_ok( $webio->digital_pin_count( 'foo' ), '==', 8, "Fetch pin count" );
+
+
+eval {
+    $webio->set_as_input( 'foo', 10 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for set_as_input()" );
+eval {
+    $webio->digital_input( 'foo', 10 );
+};
+ok( ($@ && Device::WebIO::PinDoesNotExistException->caught( $@ )),
+    "Caught exception for using too high a pin for digital_input()" );
+
+eval {
+    $webio->digital_output( 'foo', 0 );
+};
+ok( ($@ && Device::WebIO::FunctionNotSupportedException->caught( $@ )),
+    "Caught exception for using an output function on an input-only object"
+);

@@ -21,18 +21,31 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 12;
+use Test::More tests => 8;
 use v5.12;
+use lib 't/lib/';
+use Device::WebIO;
+use MockPWMOutput;
 
-use_ok( 'Device::WebIO::Exceptions' );
-use_ok( 'Device::WebIO' );
-use_ok( 'Device::WebIO::Device' );
-use_ok( 'Device::WebIO::Device::DigitalInput' );
-use_ok( 'Device::WebIO::Device::DigitalOutput' );
-use_ok( 'Device::WebIO::Device::ADC' );
-use_ok( 'Device::WebIO::Device::PWM' );
-use_ok( 'Device::WebIO::Device::SPI' );
-use_ok( 'Device::WebIO::Device::I2C' );
-use_ok( 'Device::WebIO::Device::Serial' );
-use_ok( 'Device::WebIO::Device::OneWire' );
-use_ok( 'Device::WebIO::Device::VideoStream' );
+
+my $output = MockPWMOutput->new({
+    pwm_max_int        => 255,
+    pwm_bit_resolution => 8,
+    pwm_pin_count      => 8,
+});
+ok( $output->does( 'Device::WebIO::Device' ), "Does Device role" );
+ok( $output->does( 'Device::WebIO::Device::PWM' ), "Does PWM role" );
+
+my $webio = Device::WebIO->new;
+$webio->register( 'foo', $output );
+
+cmp_ok( $webio->pwm_count( 'foo' ),      '==', 8,   "Pin count" );
+cmp_ok( $webio->pwm_resolution( 'foo' ), '==', 8,   "Bit resolution" );
+cmp_ok( $webio->pwm_max_int( 'foo' ),    '==', 255, "Max int" );
+
+$webio->pwm_output_int( 'foo', 0, 255 );
+$webio->pwm_output_int( 'foo', 1, 0 );
+$webio->pwm_output_float( 'foo', 2, 0.5 );
+cmp_ok( $output->mock_get_output( 0 ), '==', 255, "PWM pin 0 set" );
+cmp_ok( $output->mock_get_output( 1 ), '==', 0,   "PWM pin 1 set" );
+cmp_ok( $output->mock_get_output( 2 ), '==', 128, "PWM pin 2 set" );

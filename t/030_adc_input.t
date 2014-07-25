@@ -29,34 +29,33 @@ use MockADCInput;
 
 
 my $input = MockADCInput->new({
-    max_int        => 256,
-    bit_resolution => 8,
-    volt_ref       => 5.0,
-    pin_count      => 8,
+    adc_max_int        => 255,
+    adc_bit_resolution => 8,
+    adc_volt_ref       => 5.0,
+    adc_pin_count      => 8,
 });
 ok( $input->does( 'Device::WebIO::Device' ), "Does Device role" );
-ok( $input->does( 'Device::WebIO::Device::ADC' ),
-    "Does DigitalInput role" );
+ok( $input->does( 'Device::WebIO::Device::ADC' ), "Does ADC role" );
 
 my $webio = Device::WebIO->new;
 $webio->register( 'foo', $input );
 
 cmp_ok( $webio->adc_count( 'foo' ),      '==', 8,   "Pin count" );
 cmp_ok( $webio->adc_resolution( 'foo' ), '==', 8,   "Bit resolution" );
-cmp_ok( $webio->adc_max_int( 'foo' ),    '==', 256, "Max int" );
+cmp_ok( $webio->adc_max_int( 'foo' ),    '==', 255, "Max int" );
 cmp_ok( $webio->adc_volt_ref( 'foo' ),   '==', 5.0, "Volt reference" );
 
-$input->mock_set_input( 0, 256 );
+$input->mock_set_input( 0, 255 );
 $input->mock_set_input( 1, 0 );
 $input->mock_set_input( 2, 127 );
-cmp_ok( $webio->adc_input_int( 'foo', 0 ), '==', 256, "ADC pin 0 set" );
+cmp_ok( $webio->adc_input_int( 'foo', 0 ), '==', 255, "ADC pin 0 set" );
 cmp_ok( $webio->adc_input_int( 'foo', 1 ), '==', 0,   "ADC pin 1 set" );
 cmp_ok( $webio->adc_input_int( 'foo', 2 ), '==', 127, "ADC pin 2 set" );
 
 cmp_ok( $webio->adc_input_float( 'foo', 0 ), '==', 1.0, "ADC pin 0 float" );
-cmp_ok( $webio->adc_input_float( 'foo', 2 ), '==', 127 / 256,
+cmp_ok( $webio->adc_input_float( 'foo', 2 ), '==', 127 / 255,
     "ADC pin 2 float" );
 
 cmp_ok( $webio->adc_input_volts( 'foo', 0 ), '==', 5.0, "ADC pin 0 volts" );
-cmp_ok( $webio->adc_input_volts( 'foo', 2 ), '==', (127 / 256) * 5.0,
+cmp_ok( $webio->adc_input_volts( 'foo', 2 ), '==', (127 / 255) * 5.0,
     "ADC pin 2 volts" );
