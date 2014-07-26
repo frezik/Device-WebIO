@@ -145,18 +145,18 @@ sub pwm_count
 
 sub pwm_resolution
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_role_check( $obj, 'PWM' );
-    return $obj->pwm_bit_resolution;
+    return $obj->pwm_bit_resolution( $pin );
 }
 
 sub pwm_max_int
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_role_check( $obj, 'PWM' );
-    return $obj->pwm_max_int;
+    return $obj->pwm_max_int( $pin );
 }
 
 sub pwm_output_int
