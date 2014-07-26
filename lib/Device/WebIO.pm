@@ -41,19 +41,21 @@ sub set_as_output
     return 1;
 }
 
-sub digital_pin_count
+sub digital_input_pin_count
 {
     my ($self, $name) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInput' );
+    my $count = $obj->input_pin_count;
+    return $count;
+}
 
-    my $count;
-    if( $obj->does( 'Device::WebIO::Device::DigitalInput' ) ) {
-        $count = $obj->input_pin_count;
-    }
-    elsif( $obj->does( 'Device::WebIO::Device::DigitalOutput' ) ) {
-        $count = $obj->output_pin_count;
-    }
-
+sub digital_output_pin_count
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalOutput' );
+    my $count = $obj->output_pin_count;
     return $count;
 }
 

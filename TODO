@@ -1,4 +1,3 @@
-* Split digital_pin_count() into input and output versions
 * Read ports (all input/output pins at once)
 * VideoStream
 * SPI

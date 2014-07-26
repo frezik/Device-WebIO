@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 7;
+use Test::More tests => 9;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -35,6 +35,11 @@ ok( $io->does( 'Device::WebIO::Device::DigitalOutput' ),
 
 my $webio = Device::WebIO->new;
 $webio->register( 'foo', $io );
+
+cmp_ok( $webio->digital_input_pin_count( 'foo' ), '==', 10,
+    "Input pin count" );
+cmp_ok( $webio->digital_output_pin_count( 'foo' ), '==', 8,
+    "Output pin count" );
 
 $webio->set_as_input( 'foo', 0 );
 $webio->set_as_output( 'foo', 1 );

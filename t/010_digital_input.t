@@ -48,7 +48,8 @@ $input->mock_set_input( 1, 1 );
 ok(!$webio->digital_input( 'foo', 0 ), "Input 0 on pin 0" );
 ok( $webio->digital_input( 'foo', 1 ), "Input 1 on pin 1" );
 
-cmp_ok( $webio->digital_pin_count( 'foo' ), '==', 8, "Fetch pin count" );
+cmp_ok( $webio->digital_input_pin_count( 'foo' ), '==', 8,
+    "Fetch pin count" );
 
 
 eval {
