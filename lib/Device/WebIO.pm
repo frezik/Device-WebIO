@@ -86,26 +86,26 @@ sub adc_count
 
 sub adc_resolution
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_role_check( $obj, 'ADC' );
-    return $obj->adc_bit_resolution;
+    return $obj->adc_bit_resolution( $pin );
 }
 
 sub adc_max_int
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_role_check( $obj, 'ADC' );
-    return $obj->adc_max_int;
+    return $obj->adc_max_int( $pin );
 }
 
 sub adc_volt_ref
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_role_check( $obj, 'ADC' );
-    return $obj->adc_volt_ref;
+    return $obj->adc_volt_ref( $pin );
 }
 
 sub adc_input_int

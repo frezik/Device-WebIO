@@ -2,13 +2,25 @@ package MockADCInput;
 use v5.12;
 use Moo;
 
-has 'adc_max_int',        is => 'ro';
-has 'adc_bit_resolution', is => 'ro';
-has 'adc_volt_ref',       is => 'ro';
-has 'adc_pin_count',      is => 'ro';
-has '_input_int',     is => 'ro', default => sub {[]};
+has 'adc_bit_resolution_by_pin', is => 'ro';
+has 'adc_volt_ref_by_pin',       is => 'ro';
+has 'adc_pin_count',             is => 'ro';
+has '_input_int',                is => 'ro', default => sub {[]};
 with 'Device::WebIO::Device::ADC';
 
+
+
+sub adc_bit_resolution
+{
+    my ($self, $pin) = @_;
+    return $self->adc_bit_resolution_by_pin->[$pin];
+}
+
+sub adc_volt_ref
+{
+    my ($self, $pin) = @_;
+    return $self->adc_volt_ref_by_pin->[$pin];
+}
 
 sub mock_set_input
 {

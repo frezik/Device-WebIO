@@ -1,9 +1,13 @@
 * Split digital_pin_count() into input and output versions
+* Pass pin to functions like adc_volt_ref(), as their values could 
+  be different on different pins (they are on the pcDuino)
+* Read ports (all input/output pins at once)
 * VideoStream
 * SPI
 * I2C
 * OneWire
 * Serial
+* Servos (part of PWM in REST interface, but different role)
 * Sensors
     * Temperature
     * Pressure
