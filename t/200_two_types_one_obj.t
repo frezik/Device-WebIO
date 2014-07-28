@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 9;
+use Test::More tests => 12;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -50,6 +50,13 @@ $io->mock_set_input( 0, 1 );
 ok( $webio->digital_input( 'foo', 0 ), "Input 1 on pin 0" );
 $webio->digital_output( 'foo', 1, 1 );
 ok( $io->mock_get_output( 1 ), "Output 1 on pin 1" );
+
+cmp_ok( $webio->digital_input_port( 'foo' ), '==', 0b0000000011, 
+    "Read whole port" );
+
+$webio->digital_output_port( 'foo', 0b00110000 );
+cmp_ok( $io->mock_get_output( 1 ), '==', 0, "Port write pin 0" );
+cmp_ok( $io->mock_get_output( 4 ), '==', 1, "Port write pin 5" );
 
 eval {
     $webio->set_as_output( 'foo', 9 );

@@ -68,6 +68,23 @@ sub digital_input
     return $obj->input_pin( $pin );
 }
 
+sub digital_input_port
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInput' );
+    return $obj->input_port;
+}
+
+sub digital_output_port
+{
+    my ($self, $name, $out) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalOutput' );
+    $obj->output_port( $out );
+    return 1;
+}
+
 sub digital_output
 {
     my ($self, $name, $pin, $val) = @_;

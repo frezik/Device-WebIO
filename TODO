@@ -1,4 +1,3 @@
-* Read ports (all input/output pins at once)
 * VideoStream
 * SPI
 * I2C
