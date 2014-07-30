@@ -16,7 +16,7 @@ sub mock_get_output
     return $self->_pin_output->[$pin];
 }
 
-sub mock_is_set_output
+sub is_set_output
 {
     my ($self, $pin) = @_;
     return $self->_pin_set_output->[$pin];

@@ -30,18 +30,18 @@ use MockDigitalOutput;
 my $output = MockDigitalOutput->new({
     output_pin_count => 8,
 });
+my $webio = Device::WebIO->new;
+$webio->register( 'foo', $output );
+
 ok( $output->does( 'Device::WebIO::Device' ), "Does Device role" );
 ok( $output->does( 'Device::WebIO::Device::DigitalOutput' ),
     "Does DigitalOutput role" );
 
-my $webio = Device::WebIO->new;
-$webio->register( 'foo', $output );
-
 $webio->set_as_output( 'foo', 0 );
 $webio->set_as_output( 'foo', 1 );
-ok( $output->mock_is_set_output( 0 ), "Pin 0 set as output" );
-ok( $output->mock_is_set_output( 1 ), "Pin 1 set as output" );
-ok(!$output->mock_is_set_output( 2 ), "Pin 2 not set as output" );
+ok( $webio->is_set_output( 'foo', 0 ), "Pin 0 set as output" );
+ok( $webio->is_set_output( 'foo', 1 ), "Pin 1 set as output" );
+ok(!$webio->is_set_output( 'foo', 2 ), "Pin 2 not set as output" );
 
 $webio->digital_output( 'foo', 0, 0 );
 $webio->digital_output( 'foo', 1, 1 );

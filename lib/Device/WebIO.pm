@@ -41,6 +41,24 @@ sub set_as_output
     return 1;
 }
 
+sub is_set_input
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'DigitalInput' );
+    return $obj->is_set_input( $pin );
+}
+
+sub is_set_output
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'DigitalOutput' );
+    return $obj->is_set_output( $pin );
+}
+
 sub digital_input_pin_count
 {
     my ($self, $name) = @_;

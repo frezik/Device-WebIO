@@ -33,7 +33,7 @@ sub mock_set_input
     return $val;
 }
 
-sub mock_is_set_input
+sub is_set_input
 {
     my ($self, $pin) = @_;
     return $self->_pins_set->[$pin] == TYPE_INPUT;
@@ -45,7 +45,7 @@ sub mock_get_output
     return $self->_pins->[$pin];
 }
 
-sub mock_is_set_output
+sub is_set_output
 {
     my ($self, $pin) = @_;
     return $self->_pins_set->[$pin] == TYPE_OUTPUT;

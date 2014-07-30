@@ -19,7 +19,7 @@ sub mock_set_input
     return $val;
 }
 
-sub mock_is_set_input
+sub is_set_input
 {
     my ($self, $pin) = @_;
     return $self->_pin_set_input->[$pin];

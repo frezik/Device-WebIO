@@ -30,18 +30,18 @@ use MockDigitalInput;
 my $input = MockDigitalInput->new({
     input_pin_count => 8,
 });
+my $webio = Device::WebIO->new;
+$webio->register( 'foo', $input );
+
 ok( $input->does( 'Device::WebIO::Device' ), "Does Device role" );
 ok( $input->does( 'Device::WebIO::Device::DigitalInput' ),
     "Does DigitalInput role" );
 
-my $webio = Device::WebIO->new;
-$webio->register( 'foo', $input );
-
 $webio->set_as_input( 'foo', 0 );
 $webio->set_as_input( 'foo', 1 );
-ok( $input->mock_is_set_input( 0 ), "Pin 0 set as input" );
-ok( $input->mock_is_set_input( 1 ), "Pin 1 set as input" );
-ok(!$input->mock_is_set_input( 2 ), "Pin 2 not set as input" );
+ok( $webio->is_set_input( 'foo', 0 ), "Pin 0 set as input" );
+ok( $webio->is_set_input( 'foo', 1 ), "Pin 1 set as input" );
+ok(!$webio->is_set_input( 'foo', 2 ), "Pin 2 not set as input" );
 
 $input->mock_set_input( 0, 0 );
 $input->mock_set_input( 1, 1 );

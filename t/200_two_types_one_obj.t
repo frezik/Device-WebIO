@@ -43,8 +43,8 @@ cmp_ok( $webio->digital_output_pin_count( 'foo' ), '==', 8,
 
 $webio->set_as_input( 'foo', 0 );
 $webio->set_as_output( 'foo', 1 );
-ok( $io->mock_is_set_input( 0 ), "Pin 0 set as input" );
-ok( $io->mock_is_set_output( 1 ), "Pin 1 set as output" );
+ok( $webio->is_set_input( 'foo', 0 ), "Pin 0 set as input" );
+ok( $webio->is_set_output( 'foo', 1 ), "Pin 1 set as output" );
 
 $io->mock_set_input( 0, 1 );
 ok( $webio->digital_input( 'foo', 0 ), "Input 1 on pin 0" );
