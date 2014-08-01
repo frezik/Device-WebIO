@@ -214,6 +214,102 @@ sub pwm_output_float
     return $obj->pwm_output_float( $pin, $value );
 }
 
+sub vid_channels
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_channels;
+}
+
+sub vid_width
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_width( $pin );
+}
+
+sub vid_height
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_height( $pin );
+}
+
+sub vid_fps
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_fps( $pin );
+}
+
+sub vid_kbps
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_kbps( $pin );
+}
+
+sub vid_set_width
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_set_width( $pin, $value );
+}
+
+sub vid_set_height
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_set_height( $pin, $value );
+}
+
+sub vid_set_fps
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_set_fps( $pin, $value );
+}
+
+sub vid_set_kbps
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
+    return $obj->vid_set_kbps( $pin, $value );
+}
+
+sub vid_allowed_content_types
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    return $obj->vid_allowed_content_types( $pin );
+}
+
+sub vid_stream
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    return $obj->vid_stream( $pin );
+}
+
 
 sub _get_obj
 {
@@ -257,6 +353,10 @@ sub _pin_count_for_obj
     elsif( $type eq 'PWM' &&
         $obj->does( 'Device::WebIO::Device::PWM' ) ) {
         $count = $obj->pwm_pin_count;
+    }
+    elsif( $type eq 'VideoOutput' &&
+        $obj->does( 'Device::WebIO::Device::VideoOutput' ) ) {
+        $count = $obj->vid_channels;
     }
 
     return $count;
