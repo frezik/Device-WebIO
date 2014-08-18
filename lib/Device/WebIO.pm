@@ -304,10 +304,10 @@ sub vid_allowed_content_types
 
 sub vid_stream
 {
-    my ($self, $name, $pin) = @_;
+    my ($self, $name, $pin, $type) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
-    return $obj->vid_stream( $pin );
+    return $obj->vid_stream( $pin, $type );
 }
 
 
