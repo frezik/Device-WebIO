@@ -426,6 +426,12 @@ Analog-to-Digital, Pulse Width Modulation, and many other devices.  Drivers
 are available for the Raspberry Pi, PCDuino, Arduino (via Firmata attached 
 over USB), and many others in the future.
 
+The 35,000-foot-view is that the Device::WebIO object is registered with 
+one or more objects that do the C<Device::WebIO::Device> role.  These objects 
+provide certain services, in accordance with the individual roles under the 
+C<Device::WebIO::Device::*> namespace, such as DigitalInput, DigitalOutput, 
+ADC, etc.
+
 =head1 METHODS
 
 =head3 new
@@ -642,6 +648,9 @@ Returns a filehandle for streaming the video channel.  C<$type> is one of the
 MIME types returned by C<vid_allowed_content_types()>.
 
 =head1 SEE ALSO
+
+WebIOPi, the Python project where Device::WebIO gets its inspiration: 
+L<https://code.google.com/p/webiopi/>
 
 =head1 LICENSE
 
