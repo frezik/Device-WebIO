@@ -642,7 +642,7 @@ Returns a list of MIME types allowed for the given video channel.
 
 =head3 vid_stream
 
-  vid_stream( $name, $name, $pin, $type );
+  vid_stream( $name, $channel, $type );
 
 Returns a filehandle for streaming the video channel.  C<$type> is one of the 
 MIME types returned by C<vid_allowed_content_types()>.
