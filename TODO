@@ -1,3 +1,9 @@
+* PCDuino:
+    * PWM
+    * ADC
+* GStreamer
+    * Docs
+    * Release
 * SPI
 * I2C
 * OneWire
