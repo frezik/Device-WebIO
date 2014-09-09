@@ -10,6 +10,17 @@ has '_pin_output',     is => 'ro', default => sub {[]};
 has '_pin_set_output', is => 'ro', default => sub {[]};
 
 
+sub pin_desc
+{
+    # Placeholder
+}
+
+sub all_desc
+{
+    # Placeholder
+}
+
+
 sub mock_get_output
 {
     my ($self, $pin) = @_;

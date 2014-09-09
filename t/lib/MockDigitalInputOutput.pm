@@ -26,6 +26,17 @@ has '_pins_set' => (
 );
 
 
+sub pin_desc
+{
+    # Placeholder
+}
+
+sub all_desc
+{
+    # Placeholder
+}
+
+
 sub mock_set_input
 {
     my ($self, $pin, $val) = @_;

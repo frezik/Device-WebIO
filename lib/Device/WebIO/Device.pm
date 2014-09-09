@@ -26,6 +26,10 @@ package Device::WebIO::Device;
 use v5.12;
 use Moo::Role;
 
+requires 'pin_desc';
+requires 'all_desc';
+
+
 1;
 __END__
 
@@ -36,9 +40,57 @@ __END__
 
 =head1 DESCRIPTION
 
-Actually does nothing except providing a singular role that all other 
-devices are based on.  You probably want to be looking at one of the specific 
-roles under the C<Device::WebIO::Device::*> namespace.
+Base role for other C<Device::WebIO::Device::*> roles.
+
+=head1 REQUIRED METHODS
+
+=head2 pin_desc
+
+Returns an array ref, with each entry being a string description of a pin on 
+your device's header.  Possible values:
+
+=over 4
+
+=item * Some number (corresponding to a GPIO number)
+
+=item * "V33" (3.3 volt power)
+
+=item * "V50" (5.0 volt power)
+
+=item * "GND" (ground)
+
+=back
+
+
+=head2 all_desc
+
+Returns a hashref, with the following keys:
+
+=over 4
+
+=item * UART [bool]
+
+=item * SPI [bool]
+
+=item * I2C [bool]
+
+=item * ONEWIRE [bool]
+
+=item * GPIO [hashref]
+
+=back
+
+GPIO's keys are numbers mapping to each GPIO pin.  The values are a hashref 
+containing:
+
+=over 4
+
+=item * function ["IN", "OUT", "ALTn" (where n is some number)]
+
+=item * value [bool]
+
+=back
+
 
 =head1 LICENSE
 

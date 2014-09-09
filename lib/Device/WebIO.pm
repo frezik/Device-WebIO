@@ -44,6 +44,21 @@ sub register
 }
 
 
+sub pin_desc
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    return $obj->pin_desc;
+}
+
+sub all_desc
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    return $obj->all_desc;
+}
+
+
 sub set_as_input
 {
     my ($self, $name, $pin) = @_;

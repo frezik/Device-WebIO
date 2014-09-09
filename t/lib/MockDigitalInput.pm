@@ -5,11 +5,42 @@ use namespace::clean;
 
 
 has 'input_pin_count', is => 'ro';
+has 'pin_desc' => (
+    is      => 'ro',
+    default => sub {[qw{
+        V50 GND GND 0 1 2 3 GND
+    }]}
+);
 
 with 'Device::WebIO::Device::DigitalInput';
 
 has '_pin_input',     is => 'ro', default => sub {[]};
 has '_pin_set_input', is => 'ro', default => sub {[]};
+
+
+sub all_desc
+{
+    my ($self) = @_;
+    my $pin_count = $self->input_pin_count;
+
+    my %data = (
+        UART    => 0,
+        SPI     => 0,
+        I2C     => 0,
+        ONEWIRE => 0,
+        GPIO => {
+            map {
+                my $value = $self->input_pin( $_ ) // 0;
+                $_ => {
+                    function => 'IN',
+                    value    => $value,
+                };
+            } 0 .. ($pin_count - 1)
+        },
+    );
+
+    return \%data;
+}
 
 
 sub mock_set_input

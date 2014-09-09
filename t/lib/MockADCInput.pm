@@ -9,6 +9,16 @@ has '_input_int',                is => 'ro', default => sub {[]};
 with 'Device::WebIO::Device::ADC';
 
 
+sub pin_desc
+{
+    # Placeholder
+}
+
+sub all_desc
+{
+    # Placeholder
+}
+
 
 sub adc_bit_resolution
 {

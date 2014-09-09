@@ -8,6 +8,17 @@ has '_output_int',               is => 'ro', default => sub {[]};
 with 'Device::WebIO::Device::PWM';
 
 
+sub pin_desc
+{
+    # Placeholder
+}
+
+sub all_desc
+{
+    # Placeholder
+}
+
+
 sub pwm_bit_resolution
 {
     my ($self, $pin) = @_;

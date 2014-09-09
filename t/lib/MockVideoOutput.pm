@@ -11,6 +11,17 @@ has '_vid_kbps',        is => 'ro', default => sub {[]};
 with 'Device::WebIO::Device::VideoOutput';
 
 
+sub pin_desc
+{
+    # Placeholder
+}
+
+sub all_desc
+{
+    # Placeholder
+}
+
+
 sub vid_channels { 1 }
 
 sub vid_width  { $_[0]->_vid_width ->[$_[1]] }
