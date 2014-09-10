@@ -35,4 +35,4 @@ use_ok( 'Device::WebIO::Device::SPI' );
 use_ok( 'Device::WebIO::Device::I2C' );
 use_ok( 'Device::WebIO::Device::Serial' );
 use_ok( 'Device::WebIO::Device::OneWire' );
-use_ok( 'Device::WebIO::Device::VideoStream' );
+use_ok( 'Device::WebIO::Device::VideoOutput' );
