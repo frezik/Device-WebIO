@@ -1,9 +1,8 @@
 * PCDuino:
-    * pin_desc()/all_desc()
     * PWM
     * ADC
-* Firmata pin_desc()/all_desc()
 * GStreamer
+    * all_desc()/pin_desc()
     * Docs
     * Release
 * Still camera
