@@ -1,3 +1,9 @@
+FOR 0.002 RELEASE
+* Test PCDuino on physical device
+* Test changing pins on Raspberry Pi via Dancer
+* Changelog
+
+EXTENDED TODO
 * PCDuino:
     * PWM
     * ADC
