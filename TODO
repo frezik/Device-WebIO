@@ -1,7 +1,6 @@
 FOR 0.002 RELEASE
 * Implement is_set_input() and is_set_output() on PCDuino
 * Test PCDuino on physical device
-* Test changing pins on Raspberry Pi via Dancer
 * Changelog
 
 EXTENDED TODO
