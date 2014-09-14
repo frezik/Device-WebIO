@@ -31,6 +31,7 @@ with 'Device::WebIO::Device';
 requires 'input_pin_count';
 requires 'input_pin';
 requires 'set_as_input';
+requires 'is_set_input';
 
 # There may be more efficient ways to do this on your platform.  Override 
 # this if there are.
@@ -76,6 +77,12 @@ Return the input value for the given pin.
     set_as_input( $pin );
 
 Set the given pin as an input pin.
+
+=head2 is_set_input
+
+    is_set_input( $pin );
+
+Return true if the given pin is set as input.
 
 =head1 PROVIDED METHODS
 

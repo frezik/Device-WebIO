@@ -31,6 +31,7 @@ with 'Device::WebIO::Device';
 requires 'output_pin_count';
 requires 'output_pin';
 requires 'set_as_output';
+requires 'is_set_output';
 
 # There may be more efficient ways to do this on your platform.  Override 
 # this if there are.
@@ -74,6 +75,12 @@ Set the given value for the given pin.
     set_as_output( $pin );
 
 Set the given pin as an output pin.
+
+=head2 is_set_output
+
+    is_set_output( $pin );
+
+Returns true if the given pin is set as an output pin.
 
 =head1 PROVIDED METHODS
 
