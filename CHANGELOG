@@ -1,0 +1,9 @@
+Revision history for perl module Device::WebIO
+
+0.002 2014-??-??
+
+- all_desc() and pin_desc() added as required GPIO methods
+
+0.001 2014-08-28
+
+- Basic API defined

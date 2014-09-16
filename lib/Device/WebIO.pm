@@ -460,6 +460,62 @@ Constructor.
 Register a driver object with the given name.  The object must do the 
 c<Device::WebIO::Device> role.
 
+=head3 all_desc
+
+    all_desc( $name );
+
+Returns hashref specifying the capabilities of the device.
+
+Entries in the hashref are:
+
+=over 4
+
+=item * UART [bool]
+
+=item * SPI [bool]
+
+=item * I2C [bool]
+
+=item * ONEWIRE [bool]
+
+=item * GPIO [hashref]
+
+=back
+
+GPIO's entries are numbers mapping to each GPIO pin.  The values are hashrefs
+containing:
+
+=over 4
+
+=item * function ["IN", "OUT", "ALTn" (where n is some number)]
+
+=item * value [bool]
+
+=back
+
+
+
+=head3 pin_desc
+
+    pin_desc( $name );
+
+Returns an arrayref containing a definition for each pin in order.
+
+Each entry can be:
+
+=over 4
+
+=item * Some number (corresponding to a GPIO number)
+
+=item * "V33" (3.3 volt power)
+
+=item * "V50" (5.0 volt power)
+
+=item * "GND" (ground)
+
+=back
+
+
 =head2 Input
 
 =head3 set_as_input
