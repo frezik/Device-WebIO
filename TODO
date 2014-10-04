@@ -1,6 +1,3 @@
-FOR 0.002 RELEASE
-* Test PCDuino on physical device
-
 EXTENDED TODO
 * PCDuino:
     * PWM
@@ -9,7 +6,6 @@ EXTENDED TODO
     * all_desc()/pin_desc()
     * Docs
     * Release
-* Still camera
 * Interrupts
 * SPI
 * I2C

@@ -348,6 +348,66 @@ sub vid_stream
     return $obj->vid_stream( $pin, $type );
 }
 
+sub img_channels
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    return $obj->img_channels;
+}
+
+sub img_width
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_width( $pin );
+}
+
+sub img_height
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_height( $pin );
+}
+
+sub img_set_width
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_set_width( $pin, $value );
+}
+
+sub img_set_height
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_set_height( $pin, $value );
+}
+
+sub img_allowed_content_types
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_allowed_content_types( $pin );
+}
+
+sub img_stream
+{
+    my ($self, $name, $pin, $type) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_stream( $pin, $type );
+}
+
 
 sub _get_obj
 {
@@ -395,6 +455,10 @@ sub _pin_count_for_obj
     elsif( $type eq 'VideoOutput' &&
         $obj->does( 'Device::WebIO::Device::VideoOutput' ) ) {
         $count = $obj->vid_channels;
+    }
+    elsif( $type eq 'StillImageOutput' &&
+        $obj->does( 'Device::WebIO::Device::StillImageOutput' ) ) {
+        $count = $obj->img_channels;
     }
 
     return $count;
@@ -717,6 +781,51 @@ Returns a list of MIME types allowed for the given video channel.
 
 Returns a filehandle for streaming the video channel.  C<$type> is one of the 
 MIME types returned by C<vid_allowed_content_types()>.
+
+=head2 Still Image
+
+=head3 img_channels
+
+  img_channels( $name );
+
+Get the number of still image channels.
+
+=head3 img_width
+
+  img_width( $name, $channel );
+
+Return the width of the image channel.
+
+=head3 img_height
+
+  img_height( $name, $channel );
+
+Return the height of the image channel.
+
+=head3 img_set_width
+
+  img_set_width( $name, $channel, $width );
+
+Set the width of the image channel.
+
+=head3 img_set_height
+
+  img_set_height( $name, $channel, $height );
+
+Set the height of the image channel.
+
+=head3 img_allowed_content_types
+
+  img_allowed_content_types( $name, $channel );
+
+Returns a list of MIME types allowed for the given video channel.
+
+=head3 img_stream
+
+  img_stream( $name, $channel, $type );
+
+Returns a filehandle for streaming the video channel.  C<$type> is one of the 
+MIME types return by C<img_allowed_content_types()>.
 
 =head1 SEE ALSO
 
