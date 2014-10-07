@@ -1,3 +1,7 @@
+NEXT RELEASE
+    * I2CProvider docs
+    * I2CUser docs
+
 EXTENDED TODO
 * PCDuino:
     * PWM
@@ -8,7 +12,6 @@ EXTENDED TODO
     * Release
 * Interrupts
 * SPI
-* I2C
 * OneWire
 * Serial
 * Servos (part of PWM in REST interface, but different role)
