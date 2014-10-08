@@ -1,5 +1,9 @@
 Revision history for perl module Device::WebIO
 
+0.004 2014-10-??
+
+- Implement temperature sensor interface
+
 0.003 2014-10-04
 
 - Still Image API defined
