@@ -424,6 +424,39 @@ sub i2c_write
     return $obj->i2c_write( $pin, $addr, $register, @bytes );
 }
 
+sub temp_celsius
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    Device::WebIO::FunctionNotSupportedException->throw(
+        message => "Asked for temperature, but $name does not do the"
+            . " TempSensor role"
+    ) if ! $obj->does( 'Device::WebIO::Device::TempSensor' );
+    return $obj->temp_celsius;
+}
+
+sub temp_kelvins
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    Device::WebIO::FunctionNotSupportedException->throw(
+        message => "Asked for temperature, but $name does not do the"
+            . " TempSensor role"
+    ) if ! $obj->does( 'Device::WebIO::Device::TempSensor' );
+    return $obj->temp_kelvins;
+}
+
+sub temp_fahrenheit
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    Device::WebIO::FunctionNotSupportedException->throw(
+        message => "Asked for temperature, but $name does not do the"
+            . " TempSensor role"
+    ) if ! $obj->does( 'Device::WebIO::Device::TempSensor' );
+    return $obj->temp_fahrenheit;
+}
+
 
 sub _get_obj
 {
