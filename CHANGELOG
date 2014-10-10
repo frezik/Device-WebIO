@@ -1,6 +1,6 @@
 Revision history for perl module Device::WebIO
 
-0.004 2014-10-??
+0.004 2014-10-09
 
 - Implement temperature sensor interface
 
