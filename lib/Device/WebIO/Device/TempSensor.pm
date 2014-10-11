@@ -80,7 +80,47 @@ __END__
 
 =head1 NAME
 
+  Device::WebIO::Device::TempSensor - Role for Temperature Sensors
 
+=head1 PROVIDED CONVERSION METHODS
+
+These are mainly for internal use.  A given temperature sensor will probably 
+return values in one type of unit (usually Celsius or Kelvin).  Use these 
+to convert to all other types.
+
+Each of these take a value in one unit, and return in another.
+
+=over
+
+=item * _convert_f_to_k
+
+=item * _convert_f_to_c
+
+=item * _convert_c_to_k
+
+=item * _convert_c_to_f
+
+=item * _convert_k_to_c
+
+=item * _convert_k_to_f
+
+=back
+
+=head1 REQUIRED METHODS
+
+These all return the temperature in the given unit.  Generally, the 
+implementation will return one of these as its "natural" unit type, and then 
+do conversions for the rest.
+
+=over
+
+=item * temp_kelvins
+
+=item * temp_celsius
+
+=item * temp_fahrenheit
+
+=back
 
 =head1 LICENSE
 
