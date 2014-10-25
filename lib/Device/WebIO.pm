@@ -374,6 +374,15 @@ sub img_height
     return $obj->img_height( $pin );
 }
 
+sub img_quality
+{
+    my ($self, $name, $pin) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_quality( $pin );
+}
+
 sub img_set_width
 {
     my ($self, $name, $pin, $value) = @_;
@@ -390,6 +399,15 @@ sub img_set_height
     $self->_role_check( $obj, 'StillImageOutput' );
     $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
     return $obj->img_set_height( $pin, $value );
+}
+
+sub img_set_quality
+{
+    my ($self, $name, $pin, $value) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'StillImageOutput' );
+    $self->_pin_count_check( $name, $obj, $pin, 'StillImageOutput' );
+    return $obj->img_set_quality( $pin, $value );
 }
 
 sub img_allowed_content_types
@@ -855,6 +873,12 @@ Return the width of the image channel.
 
 Return the height of the image channel.
 
+=head3 img_quality
+
+  img_quality( $name, $channel );
+
+Return the quality of the image channel.
+
 =head3 img_set_width
 
   img_set_width( $name, $channel, $width );
@@ -866,6 +890,12 @@ Set the width of the image channel.
   img_set_height( $name, $channel, $height );
 
 Set the height of the image channel.
+
+=head3 img_set_quality
+
+  img_set_quality( $name, $channel, $height );
+
+Set the quality of the image channel.
 
 =head3 img_allowed_content_types
 

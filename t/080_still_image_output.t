@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 7;
+use Test::More tests => 9;
 use v5.12;
 use lib 't/lib/';
 use MockStillImageOutput;
@@ -39,11 +39,14 @@ $webio->register( 'foo', $img );
 cmp_ok( $webio->img_channels( 'foo' ), '==', 1,    "Channel count" );
 cmp_ok( $webio->img_width( 'foo', 0 ), '==', 640,  "Width" );
 cmp_ok( $webio->img_height( 'foo', 0 ), '==', 480, "Height" );
+cmp_ok( $webio->img_quality( 'foo', 0 ), '==', 100, "Quality" );
 
 $webio->img_set_width( 'foo', 0, 1920 );
 $webio->img_set_height( 'foo', 0, 1080 );
+$webio->img_set_quality( 'foo', 0, 90 );
 cmp_ok( $webio->img_width( 'foo', 0 ),  '==', 1920, "Width" );
 cmp_ok( $webio->img_height( 'foo', 0 ), '==', 1080, "Height" );
+cmp_ok( $webio->img_quality( 'foo', 0 ), '==', 90,  "Quality" );
 
 ok( 'image/jpeg' ~~ [ $webio->img_allowed_content_types( 'foo', 0 ) ],
     "Content-type image/jpeg is allowed" );
