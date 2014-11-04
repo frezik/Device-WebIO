@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 12;
+use Test::More tests => 13;
 use v5.12;
 
 use_ok( 'Device::WebIO::Exceptions' );
@@ -32,7 +32,8 @@ use_ok( 'Device::WebIO::Device::DigitalOutput' );
 use_ok( 'Device::WebIO::Device::ADC' );
 use_ok( 'Device::WebIO::Device::PWM' );
 use_ok( 'Device::WebIO::Device::SPI' );
-use_ok( 'Device::WebIO::Device::I2C' );
+use_ok( 'Device::WebIO::Device::I2CProvider' );
+use_ok( 'Device::WebIO::Device::I2CUser' );
 use_ok( 'Device::WebIO::Device::Serial' );
 use_ok( 'Device::WebIO::Device::OneWire' );
 use_ok( 'Device::WebIO::Device::VideoOutput' );
