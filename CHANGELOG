@@ -1,6 +1,6 @@
 Revision history for perl module Device::WebIO
 
-0.006 2014-??-??
+0.006 2014-11-12
 
 - Add img_quality() and img_set_quality() for StillImage
 - Correct 001_load to check for right I2C modules
