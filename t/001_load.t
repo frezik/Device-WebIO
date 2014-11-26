@@ -29,7 +29,7 @@ use_ok( 'Device::WebIO' );
 use_ok( 'Device::WebIO::Device' );
 use_ok( 'Device::WebIO::Device::DigitalInput' );
 use_ok( 'Device::WebIO::Device::DigitalOutput' );
-use_ok( 'Device::WebIO::Device::DigitalInput::Interrupt' );
+use_ok( 'Device::WebIO::Device::DigitalInputCallback' );
 use_ok( 'Device::WebIO::Device::ADC' );
 use_ok( 'Device::WebIO::Device::PWM' );
 use_ok( 'Device::WebIO::Device::SPI' );
