@@ -132,6 +132,15 @@ sub digital_input_port
     return $obj->input_port;
 }
 
+sub digital_input_callback
+{
+    my ($self, $name, $pin, $type, $callback) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInputCallback' );
+    $self->_pin_count_check( $name, $obj, $pin, 'DigitalInputCallback' );
+    return $obj->input_callback_pin( $pin, $type, $callback );
+}
+
 sub digital_output_port
 {
     my ($self, $name, $out) = @_;
@@ -507,6 +516,10 @@ sub _pin_count_for_obj
         $obj->does( 'Device::WebIO::Device::DigitalInput' ) ) {
         $count = $obj->input_pin_count;
     }
+    elsif( $type eq 'DigitalInputCallback' &&
+        $obj->does( 'Device::WebIO::Device::DigitalInputCallback' ) ) {
+        $count = $obj->input_pin_count;
+    }
     elsif( $type eq 'DigitalOutput' &&
         $obj->does( 'Device::WebIO::Device::DigitalOutput' ) ) {
         $count = $obj->output_pin_count;
@@ -537,13 +550,20 @@ sub _pin_count_for_obj
 
 sub _role_check
 {
-    my ($self, $obj, $want_type) = @_;
-    my $full_want_type = 'Device::WebIO::Device::' . $want_type;
+    my ($self, $obj, @want_types) = @_;
 
-    if(! $obj->does( $full_want_type ) ) {
+    my $does = 0;
+    for (@want_types) {
+        my $full_type = 'Device::WebIO::Device::' . $_;
+        if( $obj->does( $full_type ) ) {
+            $does = 1;
+            last;
+        }
+    }
+    if(! $does ) {
         Device::WebIO::FunctionNotSupportedException->throw( message =>
             "Object of type " . ref($obj)
-                . " does not do the $full_want_type role"
+                . " does not any of the " . join( ', ', @want_types ) . " roles"
         );
     }
 

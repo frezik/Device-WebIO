@@ -10,7 +10,6 @@ EXTENDED TODO
     * all_desc()/pin_desc()
     * Docs
     * Release
-* Interrupts
 * SPI
 * OneWire
 * Serial
