@@ -141,6 +141,14 @@ sub digital_input_callback
     return $obj->input_callback_pin( $pin, $type, $callback );
 }
 
+sub digital_input_begin_loop
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInputCallback' );
+    return $obj->input_begin_loop();
+}
+
 sub digital_output_port
 {
     my ($self, $name, $out) = @_;
@@ -703,6 +711,27 @@ Returns the input status of the given pin.  1 for on, 0 for off.
 
 Returns an integer with each bit representing the on or off status of the 
 associated pin.
+
+=head2 Input Callback
+
+These can be used if the device does the C<DigialInputCallback> role.
+
+=head3 digital_input_callback
+
+  digital_input_callback( $name, $pin, $type, $callback );
+
+Set a callback that will be triggered when C<$pin> changes state.  C<$type> 
+is one of the constants in the C<DigitalInputCallback> role, which controls 
+when the callback is triggered--C<TRIGGER_RISING>, C<TRIGGER_FALLING>, or 
+C<TRIGGER_RISING_FALLING>.
+
+C<$callback> is a subref that will be called.
+
+=head3 digital_input_begin_loop
+
+  digital_input_begin_loop( $name );
+
+Start the loop that will trigger callbacks.
 
 =head2 Output
 

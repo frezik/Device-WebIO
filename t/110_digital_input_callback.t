@@ -21,7 +21,7 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
 # POSSIBILITY OF SUCH DAMAGE.
-use Test::More tests => 15;
+use Test::More tests => 16;
 use v5.12;
 use lib 't/lib/';
 use Device::WebIO;
@@ -79,3 +79,5 @@ cmp_ok( $FALLING_CALL, '==', 1, );
 $input->trigger_falling( 2 );
 cmp_ok( $RISING_CALL, '==', 2, );
 cmp_ok( $FALLING_CALL, '==', 2, );
+
+ok( $webio->digital_input_begin_loop( 'foo' ), "Began loop" );

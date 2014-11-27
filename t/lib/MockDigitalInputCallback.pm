@@ -36,6 +36,12 @@ sub input_pin
     # placeholder
 }
 
+sub input_begin_loop
+{
+    # placeholder
+    return 1;
+}
+
 sub input_callback_pin
 {
     my ($self, $pin, $when, $callback) = @_;
