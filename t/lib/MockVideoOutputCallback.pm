@@ -44,7 +44,7 @@ sub vid_stream
 
 sub vid_stream_callback
 {
-    my ($self, $pin, $callback) = @_;
+    my ($self, $pin, $type, $callback) = @_;
     push @{ $self->_callbacks }, $callback;
     return 1;
 }

@@ -373,7 +373,7 @@ sub vid_stream_callback
     my $obj = $self->_get_obj( $name );
     $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
     $self->_role_check( $obj, 'VideoOutputCallback' );
-    return $obj->vid_stream_callback( $type, $callback );
+    return $obj->vid_stream_callback( $pin, $type, $callback );
 }
 
 sub vid_stream_begin_loop
