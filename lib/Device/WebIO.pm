@@ -378,10 +378,11 @@ sub vid_stream_callback
 
 sub vid_stream_begin_loop
 {
-    my ($self, $name) = @_;
+    my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
     $self->_role_check( $obj, 'VideoOutputCallback' );
-    return $obj->vid_stream_begin_loop;
+    return $obj->vid_stream_begin_loop( $pin );
 }
 
 sub img_channels
@@ -932,6 +933,8 @@ These can be used if the device does the C<VideoOutputCallback> role.
 Set a callback that will be triggered when the given video channel gets a 
 new frame.  C<$type> is one of the MIME types returned by 
 C<vid_allowed_content_types()>.
+
+Only 1 callback per channel will be kept.
 
 =head3 vid_stream_begin_loop
 

@@ -52,7 +52,11 @@ This is an extension of C<VideoOutput> which can trigger callbacks.
 Add a callback that will be called for each frame of video.  The callback will 
 be passed an arrayref of bytes for the frame data.
 
+Only 1 callback per channel will be kept.
+
 =head2 vid_stream_begin_loop
+
+  vid_stream_begin_loop( $channel );
 
 Begin the loop that will start the callbacks.
 
