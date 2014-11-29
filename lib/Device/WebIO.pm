@@ -354,6 +354,7 @@ sub vid_allowed_content_types
     my ($self, $name, $pin) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
     return $obj->vid_allowed_content_types( $pin );
 }
 
@@ -362,7 +363,25 @@ sub vid_stream
     my ($self, $name, $pin, $type) = @_;
     my $obj = $self->_get_obj( $name );
     $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutput' );
     return $obj->vid_stream( $pin, $type );
+}
+
+sub vid_stream_callback
+{
+    my ($self, $name, $pin, $type, $callback) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_pin_count_check( $name, $obj, $pin, 'VideoOutput' );
+    $self->_role_check( $obj, 'VideoOutputCallback' );
+    return $obj->vid_stream_callback( $type, $callback );
+}
+
+sub vid_stream_begin_loop
+{
+    my ($self, $name) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'VideoOutputCallback' );
+    return $obj->vid_stream_begin_loop;
 }
 
 sub img_channels
@@ -901,6 +920,24 @@ Returns a list of MIME types allowed for the given video channel.
 
 Returns a filehandle for streaming the video channel.  C<$type> is one of the 
 MIME types returned by C<vid_allowed_content_types()>.
+
+=head2 Video Callback
+
+These can be used if the device does the C<VideoOutputCallback> role.
+
+=head3 vid_stream_callback
+
+  vid_stream_callback( $name, $channel, $type, $callback );
+
+Set a callback that will be triggered when the given video channel gets a 
+new frame.  C<$type> is one of the MIME types returned by 
+C<vid_allowed_content_types()>.
+
+=head3 vid_stream_begin_loop
+
+  vid_stream_begin_loop( $name, $channel );
+
+Start the loop that will trigger callbacks.
 
 =head2 Still Image
 

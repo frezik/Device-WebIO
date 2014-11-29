@@ -1,5 +1,9 @@
 Revision history for perl module Device::WebIO
 
+0.008 2014-11-??
+
+- VideoCallback implemented
+
 0.007 2014-11-27
 
 - DigitalInputCallback implemented
