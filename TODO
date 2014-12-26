@@ -10,7 +10,6 @@ EXTENDED TODO
     * all_desc()/pin_desc()
     * Docs
     * Release
-* SPI
 * OneWire
 * Serial
 * Servos (part of PWM in REST interface, but different role)
