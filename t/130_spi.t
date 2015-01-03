@@ -42,5 +42,6 @@ $spi->data( \@data );
 is_deeply( $webio->spi_read( 'spi', 0, 2 ), \@data, "Read data" );
 
 my @write_data = (0x03, 0x04);
-$webio->spi_write( 'spi', 0, @write_data );
-is_deeply( $spi->data, \@write_data, "Write data" );
+my $packed_data = pack 'C*', @write_data;
+$webio->spi_write( 'spi', 0, $packed_data );
+cmp_ok( $spi->data, 'eq', $packed_data, "Write data" );

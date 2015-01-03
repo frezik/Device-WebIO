@@ -36,8 +36,8 @@ sub spi_read
 
 sub spi_write
 {
-    my ($self, $channel, @data) = @_;
-    $self->data( \@data );
+    my ($self, $channel, $data) = @_;
+    $self->data( $data );
     return 1;
 }
 

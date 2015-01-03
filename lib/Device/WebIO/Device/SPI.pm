@@ -62,9 +62,19 @@ Read C<$len> bytes from the channel.  Returns an arrayref of data.
 
 =head2 spi_write
 
-  spi_write( $channel, @data );
+  spi_write( $channel, $packed_data );
 
-Write C<@data> to the channel.
+Write C<$packed_data> to the channel. This should be a packed string.  For many 
+devices, a single byte can packed using:
+
+  my $packed_data = pack 'n', $data;
+
+For an array of bytes, try:
+
+  my $packed_data = pack 'C*', @data;
+
+This can often be different based on the device, which is why we don't do it for 
+you.
 
 =head1 LICENSE
 
