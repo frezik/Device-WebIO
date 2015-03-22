@@ -28,7 +28,6 @@ use Moo::Role;
 
 with 'Device::WebIO::Device';
 
-requires 'adc_max_int';
 requires 'adc_bit_resolution';
 requires 'adc_volt_ref';
 requires 'adc_pin_count';

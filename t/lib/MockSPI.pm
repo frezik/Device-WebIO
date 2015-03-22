@@ -5,7 +5,7 @@ use namespace::clean;
 
 has 'spi_channels', is => 'ro';
 has 'data',         is => 'rw';
-has '_speed',       is => 'rw', default => 500_000;
+has '_speed',       is => 'rw', default => sub { 500_000 };
 with 'Device::WebIO::Device::SPI';
 
 
