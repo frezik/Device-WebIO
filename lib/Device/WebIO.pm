@@ -43,6 +43,12 @@ sub register
     return 1;
 }
 
+sub device_names
+{
+    my ($self) = @_;
+    return keys %{ $self->_device_by_name };
+}
+
 
 sub pin_desc
 {
@@ -670,6 +676,10 @@ Constructor.
 
 Register a driver object with the given name.  The object must do the 
 c<Device::WebIO::Device> role.
+
+=head3 device_names
+
+Return a list of the names of all devices that are currently registered.
 
 =head3 all_desc
 
