@@ -155,6 +155,15 @@ sub digital_input_begin_loop
     return $obj->input_begin_loop();
 }
 
+sub set_input_condvar
+{
+    my ($self, $name, $cv) = @_;
+    my $obj = $self->_get_obj( $name );
+    $self->_role_check( $obj, 'DigitalInputCallback' );
+
+    return;
+}
+
 sub digital_output_port
 {
     my ($self, $name, $out) = @_;
