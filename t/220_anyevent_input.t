@@ -48,7 +48,7 @@ ok( $input->does( 'Device::WebIO::Device::DigitalInputAnyEvent' ),
     "Does DigitalInputAnyEvent role" );
 
 # We look for interrupts on pin 3 only
-$input->set_anyevent_condvar( 3, $input_cv );
+$webio->set_anyevent_condvar( 'foo', 3, $input_cv );
 
 # Mock getting input
 my $input_timer; $input_timer = AnyEvent->timer(
